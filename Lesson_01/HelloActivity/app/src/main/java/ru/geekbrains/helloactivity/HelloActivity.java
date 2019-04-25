@@ -1,4 +1,4 @@
-package ru.geekbrains;
+package ru.geekbrains.helloactivity;
 
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.Calendar;
+
+import ru.geekbrains.R;
+import ru.geekbrains.helloactivity.BuilderGreetingPhrase;
 
 public class HelloActivity extends AppCompatActivity {
 

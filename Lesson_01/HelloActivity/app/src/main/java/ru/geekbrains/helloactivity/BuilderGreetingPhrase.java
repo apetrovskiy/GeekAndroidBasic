@@ -1,8 +1,10 @@
-package ru.geekbrains;
+package ru.geekbrains.helloactivity;
 
 import android.content.res.Resources;
 
 import java.util.Calendar;
+
+import ru.geekbrains.R;
 
 public class BuilderGreetingPhrase {
     private int currentHour;
