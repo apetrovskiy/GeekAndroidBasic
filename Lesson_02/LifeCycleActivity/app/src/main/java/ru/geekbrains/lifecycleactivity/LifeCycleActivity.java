@@ -1,23 +1,32 @@
 package ru.geekbrains.lifecycleactivity;
 
+import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 public class LifeCycleActivity extends AppCompatActivity {
+    String instanceState = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_life_cycle);
-        String instanceState;
         if (null == savedInstanceState) {
             instanceState = "Первый запуск!";
         } else {
-            instanceState = "Повторный запуск!";
+            instanceState += "Повторный запуск!";
         }
         showActivityStatus(instanceState + " - onCreate()");
+        findViewById(R.id.toSecondActivityBtn).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LifeCycleActivity.this, SecondActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -68,10 +77,12 @@ public class LifeCycleActivity extends AppCompatActivity {
         showActivityStatus("onDestroy()");
     }
 
-    private void showActivityStatus(String s) {
+    private void showActivityStatus(String status) {
+        instanceState += "\r\n";
+        instanceState += status;
         Toast.makeText(
                 getApplicationContext(),
-                s,
-                Toast.LENGTH_SHORT).show();
+                instanceState,
+                Toast.LENGTH_LONG).show();
     }
 }
