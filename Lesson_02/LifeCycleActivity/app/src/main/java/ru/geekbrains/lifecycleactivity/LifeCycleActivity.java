@@ -4,11 +4,16 @@ import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import static ru.geekbrains.lifecycleactivity.R.id.toSecondActivityBtn;
 
 public class LifeCycleActivity extends AppCompatActivity {
     String instanceState = "";
+    TextView counterTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +24,17 @@ public class LifeCycleActivity extends AppCompatActivity {
         } else {
             instanceState += "Повторный запуск!";
         }
+        counterTextView = findViewById(R.id.counterText);
+        findViewById(R.id.increaseCounterBtn).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                int counter = Integer.parseInt(counterTextView.getText().toString());
+                String text = String.valueOf(++counter);
+                counterTextView.setText(text);
+            }
+        });
         showActivityStatus(instanceState + " - onCreate()");
-        findViewById(R.id.toSecondActivityBtn).setOnClickListener(new View.OnClickListener(){
+        findViewById(toSecondActivityBtn).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LifeCycleActivity.this, SecondActivity.class);
@@ -80,6 +94,8 @@ public class LifeCycleActivity extends AppCompatActivity {
     private void showActivityStatus(String status) {
         instanceState += "\r\n";
         instanceState += status;
+        Log.i(this.getClass().getName(), "----------================================================================-------");
+        Log.i(this.getClass().getName(), status);
         Toast.makeText(
                 getApplicationContext(),
                 instanceState,

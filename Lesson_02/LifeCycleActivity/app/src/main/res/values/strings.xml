@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">LifeCycleActivity</string>
     <string name="to_second_activity">To Second Activity</string>
+    <string name="increase_counter">Increase counter</string>
 </resources>
